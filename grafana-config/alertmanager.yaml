@@ -1,0 +1,11 @@
+route:
+  receiver: tutorial-alert-manager
+  repeat_interval: 1m
+receivers:
+  - name: 'tutorial-alert-manager'
+    telegram_configs:
+      - bot_token: ${TELEGRAM_BOT_TOKEN}
+        api_url: ${TELEGRAM_API_URL}
+        chat_id: ${TELEGRAM_CHAT_ID}
+        parse_mode: ${TELEGRAM_PARSE_MODE}
+

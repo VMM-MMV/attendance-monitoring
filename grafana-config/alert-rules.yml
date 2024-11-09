@@ -1,0 +1,39 @@
+groups:
+- name: workshop_attendance_alerts
+  rules:
+  - alert: NewAttendee
+    expr: |
+      workshop_attendance_status == 1 
+      unless
+      workshop_attendance_status offset 1m == 1
+    for: 0m
+    labels:
+      alertmanager: null
+      severity: info
+    annotations:
+      summary: "*New Attendee Alert* 🚨"
+      description: "{{ $labels.name }} has joined workshop *{{ $labels.workshop_id }}*"
+
+  - alert: AttendeeLeft 
+    expr: |
+      workshop_attendance_status == 0
+      and
+      workshop_attendance_status offset 1m == 1
+    for: 0m
+    labels:
+      alertmanager: null
+      severity: info
+    annotations:
+      summary: "*Attendee Left* ⚠️"
+      description: "{{ $labels.name }} has left workshop *{{ $labels.workshop_id }}*"
+
+  - alert: OverCapacity
+    expr: |
+      count(workshop_attendance_status == 1) by (workshop_id) > 15
+    for: 1m
+    labels:
+      alertmanager: null
+      severity: warning 
+    annotations:
+      summary: "*Workshop Over Capacity* ⚠️"
+      description: "Workshop *{{ $labels.workshop_id }}* has more than 15 attendees"

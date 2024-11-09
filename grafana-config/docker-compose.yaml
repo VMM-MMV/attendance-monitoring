@@ -1,0 +1,28 @@
+services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./alert-rules.yml:/etc/prometheus/alert-rules.yml
+    ports:
+      - "9090:9090"
+
+  alertmanager:
+    image: prom/alertmanager:v0.25.0
+    ports:
+      - "9093:9093"
+    env_file: 
+      - .env
+    volumes:
+      - ./alertmanager.yaml:/config/alertmanager.yml
+    command: --config.file=/config/alertmanager.yml --log.level=debug
+
+  grafana:
+    build:
+        context: .
+        dockerfile: Dockerfile-grafana
+        no_cache: true
+    ports:
+      - "3000:3000"
+    environment:
+      - DATA_SOURCE=http://host.docker.internal:9090/
