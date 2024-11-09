@@ -4,8 +4,8 @@ route:
 receivers:
   - name: 'tutorial-alert-manager'
     telegram_configs:
-      - bot_token: ${TELEGRAM_BOT_TOKEN}
-        api_url: ${TELEGRAM_API_URL}
-        chat_id: ${TELEGRAM_CHAT_ID}
-        parse_mode: ${TELEGRAM_PARSE_MODE}
+      - bot_token: 6972447759:AAFTVc3ubo5KNl0s-3FaQVVTfOWTrQoC_s0
+        api_url: https://api.telegram.org
+        chat_id: -4103992143
+        parse_mode: ''
 

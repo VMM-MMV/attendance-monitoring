@@ -11,8 +11,6 @@ services:
     image: prom/alertmanager:v0.25.0
     ports:
       - "9093:9093"
-    env_file: 
-      - .env
     volumes:
       - ./alertmanager.yaml:/config/alertmanager.yml
     command: --config.file=/config/alertmanager.yml --log.level=debug

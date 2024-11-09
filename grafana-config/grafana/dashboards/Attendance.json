@@ -142,6 +142,20 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Photo"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "image"
+                }
+              }
+            ]
           }
         ]
       },
@@ -164,7 +178,12 @@
           "show": false
         },
         "showHeader": true,
-        "sortBy": []
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Photo"
+          }
+        ]
       },
       "pluginVersion": "10.1.5",
       "targets": [
@@ -213,7 +232,8 @@
           "id": "labelsToFields",
           "options": {
             "keepLabels": [
-              "name"
+              "name",
+              "photo"
             ]
           }
         },
@@ -226,18 +246,20 @@
           "options": {
             "excludeByName": {
               "Time": true,
-              "workshop_id": true
+              "workshop_id": true,
+              "workshop_last_seen_time": false
             },
             "indexByName": {
               "Time": 0,
               "name": 1,
-              "workshop_arrival_time": 4,
+              "photo": 5,
+              "workshop_arrival_time": 3,
               "workshop_attendance_status": 2,
-              "workshop_id": 5,
-              "workshop_last_seen_time": 3
+              "workshop_last_seen_time": 4
             },
             "renameByName": {
               "name": "Name",
+              "photo": "Photo",
               "workshop_arrival_time": "Arrival Time",
               "workshop_attendance_status": "Attendance",
               "workshop_last_seen_time": "Last Seen"
@@ -282,7 +304,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Attendance",
-  "uid": "e8c41766-a24c-4d82-836d-6ea3a003b13122",
-  "version": 2,
+  "uid": "e8c41766-a24c-4d82-836d-6ea3a00",
+  "version": 1,
   "weekStart": ""
 }
