@@ -28,7 +28,7 @@ ENV GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES=false
 ##################################################################
 
 #COPY --chown=grafana:root dist /app
-COPY grafana/entrypoint.sh /
+COPY entrypoint.sh /
 
 ##################################################################
 ## Customization depends on the Grafana version
@@ -41,24 +41,24 @@ USER root
 ##################################################################
 
 ## Replace Favicon and Apple Touch
-COPY grafana/images/fav32.png /usr/share/grafana/public/img
-COPY grafana/images/fav32.png /usr/share/grafana/public/img/apple-touch-icon.png
+COPY images/fav32.png /usr/share/grafana/public/img
+COPY images/fav32.png /usr/share/grafana/public/img/apple-touch-icon.png
 
 ## Replace Logo
-COPY grafana/images/grafana_icon.svg /usr/share/grafana/public/img/grafana_icon.svg
+COPY images/grafana_icon.svg /usr/share/grafana/public/img/grafana_icon.svg
 
 ## Update Background
-COPY grafana/images/g8_login_dark.svg /usr/share/grafana/public/img/g8_login_dark.svg
-COPY grafana/images/g8_login_dark.svg /usr/share/grafana/public/img/g8_login_light.svg
+COPY images/g8_login_dark.svg /usr/share/grafana/public/img/g8_login_dark.svg
+COPY images/g8_login_dark.svg /usr/share/grafana/public/img/g8_login_light.svg
 
 # Adding prometheus as a data source
-COPY grafana/prometheus-provisioning.yaml /etc/grafana/provisioning/datasources
+COPY prometheus-provisioning.yaml /etc/grafana/provisioning/datasources
 
 # Adding the config for the dasboards
-COPY grafana/dashboards-provisioning.yaml /etc/grafana/provisioning/dashboards
+COPY dashboards-provisioning.yaml /etc/grafana/provisioning/dashboards
 
 # Adding the dashboards
-COPY grafana/dashboards /etc/grafana/provisioning/dashboards
+COPY dashboards /etc/grafana/provisioning/dashboards
 
 
 ##################################################################
@@ -69,10 +69,10 @@ COPY grafana/dashboards /etc/grafana/provisioning/dashboards
 RUN sed -i 's|home_page =|home_page = /dashboards/|' /usr/share/grafana/conf/defaults.ini
 
 # Adding Prometheus As A Data Source
-COPY grafana/prometheus-provisioning.yaml /etc/grafana/provisioning/datasources
+COPY prometheus-provisioning.yaml /etc/grafana/provisioning/datasources
 
 # Adding The Config For The Dasboards
-COPY grafana/dashboards-provisioning.yaml /etc/grafana/provisioning/dashboards
+COPY dashboards-provisioning.yaml /etc/grafana/provisioning/dashboards
 
 # Update Title
 RUN sed -i 's|<title>\[\[.AppTitle\]\]</title>|<title>Attendance Tracker</title>|g' /usr/share/grafana/public/views/index.html

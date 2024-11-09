@@ -1,6 +1,5 @@
 from prometheus_client import Gauge
 from datetime import datetime
-import pytz
 
 # Separate gauges for different metrics
 attendance_status = Gauge(
@@ -32,8 +31,7 @@ class AttendanceMetrics:
         """
         Record attendance using separate gauges for status, last seen, and arrival time
         """
-        local_timezone = pytz.timezone("Europe/Chisinau")
-        current_time = datetime.now(local_timezone)
+        current_time = datetime.now()
         current_time_unix = int(current_time.timestamp() * 1000)
         
         attendance_status.labels(name=name, workshop_id=workshop_id, photo=photo_link).set(1 if present else 0)
